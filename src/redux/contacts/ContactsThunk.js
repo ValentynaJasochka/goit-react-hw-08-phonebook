@@ -3,13 +3,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const BASE_URL = 'https://6510093e3ce5d181df5cdbfc.mockapi.io/contacts';
+// axios.defaults.baseURL = 'https://6510093e3ce5d181df5cdbfc.mockapi.io';
+
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(BASE_URL);
+      const response = await axios.get('/contacts');
       return response.data;
     } catch (error) {
       toast.error('Oops! Something went wrong! Try reloading the page!');
@@ -21,7 +23,7 @@ export const createContactsThunk = createAsyncThunk(
   'contacts/addContact',
   async (newContact, thunkAPI) => {
     try {
-      const response = await axios.post(BASE_URL, newContact);
+      const response = await axios.post('/contacts', newContact);
       return response.data;
     } catch (error) {
       toast.error('Oops! Something went wrong!');
@@ -33,7 +35,7 @@ export const deleteContactsThunk = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/${contactId}`);
+      const response = await axios.delete(`/contacts/${contactId}`);
       return response.data;
     } catch (error) {
       toast.error('Oops! Something went wrong!');

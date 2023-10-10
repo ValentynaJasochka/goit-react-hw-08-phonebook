@@ -30,7 +30,6 @@ const authSlice = createSlice({
       state.isRefreshing = true;
     },
     [fetchCurrentUser.fulfilled](state, action) {
-      console.log(`"reducer" ${action.payload}`);
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshing = false;
